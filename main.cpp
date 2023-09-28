@@ -43,6 +43,11 @@ void EnterMenu(Textbook textbook1) {
         cin >> copyprice; // user input for copyprice
         textbook1.SetCopyPrice(copyprice); // sets the class copyprice
 
+        // asking for number of books on hand and setting it
+        cout << " number on hand: "; // prints statement
+        cin >> onhand; // user input for onhand variable
+        textbook1.SetOnHand(onhand); // setting it in class priv variaable
+
         // asking for prospective enrollment and setting it
         cout << " prospective enrollment: "; // prints statement
         cin >> enrollment; // user input for enrollment
@@ -50,11 +55,10 @@ void EnterMenu(Textbook textbook1) {
 
         // bool asking if its optional or required
         cout << " 1 for reqd/0 for optional: ";
-        cin >> userinput;
         do{
+            cin >> userinput;
             cout << "Please try again." << endl;
             cout << " 1 for reqd/0 for optional: ";
-            cin >> userinput;
         } while( userinput < 0 || userinput > 1);
         if(userinput == 1) {
             is_optional = true;
@@ -63,11 +67,10 @@ void EnterMenu(Textbook textbook1) {
 
         // asking user input for new or used
         cout << " 1 for new/0 for used: "; // prints statement
-        cin >> userinput; // asking for userinput
         do { // do while loop if userinput is out of range
+            cin >> userinput;
             cout << "Please try again." << endl; // error message
             cout << " 1 for new/0 for used: "; // prints statement again
-            cin >> userinput; // asking for user input again
         } while (userinput < 0 || userinput > 1); // loops until its 0 or 1
         if (userinput == 1) {
             is_used = true;
@@ -75,23 +78,25 @@ void EnterMenu(Textbook textbook1) {
         }
 
         cout << "***************************************************" << endl;
-        cout << "Book: " << textbook1.GetBookCode();
-        cout << "Price: " << textbook1.GetCopyPrice();
-        cout << "Inventory: " << textbook1.GetOnHand();
-        cout << "Enrolmment: " << textbook1.GetEnrollment();
+        cout << "Book: " << textbook1.GetBookCode() << endl;
+        cout << "Price: " << textbook1.GetCopyPrice() << endl;
+        cout << "Inventory: " << textbook1.GetOnHand() << endl;
+        cout << "Enrolmment: " << textbook1.GetEnrollment() << endl;
 
         if(textbook1.GetIsOptional() && textbook1.GetIsUsed()) {
-            cout << "This book is required and used.";
+            cout << "This book is required and used." << endl;
         }
         else if (textbook1.GetIsOptional() && !textbook1.GetIsUsed()){
-            cout << "This book is required and new.";
+            cout << "This book is required and new." << endl;
         }
         else if(!textbook1.GetIsOptional()) {
-            cout << "This book is not required.";
+            cout << "This book is not required." << endl;
         }
         cout << "***************************************************" << endl;
-
-
+        cout << "Need to order: " << textbook1.NeedToOrder() << endl;
+        cout << "Total Cost: $";
+        cout << textbook1.GetCopyPrice() * textbook1.NeedToOrder() << endl;
+        cout << "***************************************************" << endl;
 
         cin >> exitnum; // asking for exitnum
     } while(exitnum != 0); // loops until user enters 0
