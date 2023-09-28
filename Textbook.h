@@ -47,6 +47,8 @@ public:
 
     double SetCopyPrice(double);
 
+    int NeedToOrder();
+
 
 };
 
