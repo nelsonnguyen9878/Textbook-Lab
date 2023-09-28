@@ -26,8 +26,8 @@ void EnterMenu(Textbook textbook1) {
     userinput,
     userinput2;
 
-    bool is_optional = false,
-    is_used = false;
+    bool is_optional,
+    is_used;
 
     double copyprice;
 
@@ -83,7 +83,7 @@ void EnterMenu(Textbook textbook1) {
                 is_used = true;
                 textbook1.SetIsUsed(is_used);
             }
-            else if(userinput != 1) {
+            else if(userinput2 != 1) {
                 is_used = false;
                 textbook1.SetIsUsed(is_used);
             }
@@ -106,10 +106,17 @@ void EnterMenu(Textbook textbook1) {
         else if(!textbook1.GetIsOptional()) {
             cout << "This book is not required." << endl;
         }
-        cout << "***************************************************" << endl;
-        cout << "Need to order: " << textbook1.NeedToOrder() << endl;
-        cout << "Total Cost: $";
-        cout << textbook1.GetCopyPrice() * textbook1.NeedToOrder() << endl;
+        if (textbook1.GetIsOptional()) {
+            cout << "***************************************************" << endl;
+            cout << "Need to order: " << textbook1.NeedToOrder() << endl;
+            cout << "Total Cost: $";
+            cout << textbook1.GetCopyPrice() * textbook1.NeedToOrder() << endl;
+        }
+        else if(textbook1.GetIsOptional()) {
+            cout << "***************************************************" << endl;
+            cout << "Need to order: 0" << endl;
+            cout << "Total Cost: $0";
+        }
         cout << "***************************************************" << endl;
         cout << endl;
         cout << "Enter 1 to do another book, 0 to stop: ";
