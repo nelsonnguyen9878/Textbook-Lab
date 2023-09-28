@@ -6,6 +6,7 @@
 
 
 
+
 Textbook::Textbook() {
 
 };
@@ -35,5 +36,18 @@ double Textbook::SetCopyPrice(double copyprice) {
     this->copyprice = copyprice;
 }
 
+int Textbook::NeedToOrder() {
+    int order = 0;
+
+    if(GetIsUsed()) {
+        order = (GetEnrollment() * 0.65) - GetOnHand();
+    }
+
+    else if (!GetIsUsed()) {
+        order = (GetEnrollment() * 0.90) - GetOnHand();
+    }
+
+    return order;
+}
 
 
