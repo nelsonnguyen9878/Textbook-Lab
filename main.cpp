@@ -23,7 +23,8 @@ void EnterMenu(Textbook textbook1) {
     bookcode,
     onhand,
     enrollment,
-    userinput;
+    userinput,
+    userinput2;
 
     bool is_optional = false,
     is_used = false;
@@ -55,33 +56,46 @@ void EnterMenu(Textbook textbook1) {
 
         // bool asking if its optional or required
         cout << " 1 for reqd/0 for optional: ";
-        do{
-            cin >> userinput;
-            cout << "Please try again." << endl;
-            cout << " 1 for reqd/0 for optional: ";
-        } while( userinput < 0 || userinput > 1);
+        cin >> userinput;
+        if (userinput < 0 || userinput > 1) {
+            do{
+                cout << "Please try again." << endl;
+                cout << " 1 for reqd/0 for optional: ";
+                cin >> userinput;
+            } while( userinput < 0 || userinput > 1);
+        }
         if(userinput == 1) {
             is_optional = true;
             textbook1.SetIsOptional(is_optional);
         }
 
+
         // asking user input for new or used
         cout << " 1 for new/0 for used: "; // prints statement
-        do { // do while loop if userinput is out of range
-            cin >> userinput;
-            cout << "Please try again." << endl; // error message
-            cout << " 1 for new/0 for used: "; // prints statement again
-        } while (userinput < 0 || userinput > 1); // loops until its 0 or 1
-        if (userinput == 1) {
-            is_used = true;
-            textbook1.SetIsUsed(is_used);
+        cin >> userinput2;
+        if(userinput2 < 0 || userinput2 > 1) {
+            do { // do while loop if userinput is out of range
+                cout << "Please try again." << endl; // error message
+                cout << " 1 for new/0 for used: "; // prints statement again
+                cin >> userinput2;
+            } while (userinput2 < 0 || userinput2 > 1); // loops until its 0 or 1
+            if (userinput2 == 1) {
+                is_used = true;
+                textbook1.SetIsUsed(is_used);
+            }
+            else if(userinput != 1) {
+                is_used = false;
+                textbook1.SetIsUsed(is_used);
+            }
         }
+
+
 
         cout << "***************************************************" << endl;
         cout << "Book: " << textbook1.GetBookCode() << endl;
         cout << "Price: " << textbook1.GetCopyPrice() << endl;
         cout << "Inventory: " << textbook1.GetOnHand() << endl;
-        cout << "Enrolmment: " << textbook1.GetEnrollment() << endl;
+        cout << "Enrollment: " << textbook1.GetEnrollment() << endl << endl;
 
         if(textbook1.GetIsOptional() && textbook1.GetIsUsed()) {
             cout << "This book is required and used." << endl;
@@ -97,8 +111,11 @@ void EnterMenu(Textbook textbook1) {
         cout << "Total Cost: $";
         cout << textbook1.GetCopyPrice() * textbook1.NeedToOrder() << endl;
         cout << "***************************************************" << endl;
-
+        cout << endl;
+        cout << "Enter 1 to do another book, 0 to stop: ";
         cin >> exitnum; // asking for exitnum
+
+
     } while(exitnum != 0); // loops until user enters 0
 
 
